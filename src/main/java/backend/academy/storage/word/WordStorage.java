@@ -1,4 +1,4 @@
-package backend.academy.storage;
+package backend.academy.storage.word;
 
 import backend.academy.entity.Word;
 import backend.academy.types.Category;
