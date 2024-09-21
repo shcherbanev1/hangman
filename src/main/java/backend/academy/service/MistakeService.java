@@ -30,8 +30,4 @@ public class MistakeService {
         mistakeCount++;
     }
 
-    protected boolean isGameOver() {
-        return mistakeCount >= maxMistakes;
-    }
-
 }
