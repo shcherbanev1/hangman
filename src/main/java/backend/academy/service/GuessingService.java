@@ -1,15 +1,14 @@
 package backend.academy.service;
 
 import backend.academy.entity.Word;
-import backend.academy.game.GameSession;
 
 public class GuessingService {
 
     private final Word word;
 
-    public GuessingService(GameSession gameSession) {
-        this.word = gameSession.word();
-        initMask(gameSession.mask());
+    public GuessingService(Word word, char[] mask) {
+        this.word = word;
+        initMask(mask);
     }
 
     private void initMask(char[] mask) {
@@ -18,12 +17,12 @@ public class GuessingService {
         }
     }
 
-    public boolean guessLetter(char letter, GameSession gameSession) {
-        letter = Character.toLowerCase(letter);
+    public boolean guessLetter(char letter, char[] mask) {
+        char ignoreCaseLetter = Character.toLowerCase(letter);
         boolean guessed = false;
         for (int i = 0; i < word.word().length(); i++) {
-            if (word.word().charAt(i) == letter) {
-                gameSession.mask()[i] = word.word().charAt(i);
+            if (word.word().charAt(i) == ignoreCaseLetter) {
+                mask[i] = word.word().charAt(i);
                 guessed = true;
             }
         }

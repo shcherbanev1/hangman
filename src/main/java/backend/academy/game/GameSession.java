@@ -16,7 +16,7 @@ public class GameSession {
         this.word = word;
         this.mask = new char[word.word().length()];
         this.mistakeService = new MistakeService(word);
-        guessingService = new GuessingService(this);
+        guessingService = new GuessingService(word, mask);
     }
 
     public boolean isAlive() {
@@ -28,8 +28,10 @@ public class GameSession {
     }
 
     public boolean guess(char letter) {
-        boolean guessed = guessingService.guessLetter(letter, this);
-        if (!guessed) mistakeService.incrementMistakeCount();
+        boolean guessed = guessingService.guessLetter(letter, mask);
+        if (!guessed) {
+            mistakeService.incrementMistakeCount();
+        }
         return guessed;
     }
 
