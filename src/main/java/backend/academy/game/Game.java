@@ -38,10 +38,9 @@ public class Game {
     }
 
     private boolean initWord() {
-        Word word;
         Category category = interactionService.inputCategory();
         Complexity complexity = interactionService.inputComplexity();
-        word = generateWord(category, complexity);
+        Word word = generateWord(category, complexity);
         return word != null;
     }
 
