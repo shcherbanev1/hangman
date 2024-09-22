@@ -16,14 +16,16 @@ public class Game {
     private GameSession gameSession;
     private final InteractionService interactionService;
     private final ConsoleRender consoleRender;
+    private final WordService wordService;
 
     public Game(PrintStream printStream, InputStream inputStream) {
         this.interactionService = new InteractionService(printStream, inputStream);
         this.consoleRender = new ConsoleRender();
+        wordService = new WordService(new InCodeWordStorage());
     }
 
     public void start() {
-        while (!initWord()) {
+        while (!initWord(wordService)) {
             interactionService.println("Try again");
         }
         interactionService.println(gameSession.word().getInfo());
@@ -37,10 +39,10 @@ public class Game {
         }
     }
 
-    private boolean initWord() {
+    public boolean initWord(WordService wordService) {
         Category category = interactionService.inputCategory();
         Complexity complexity = interactionService.inputComplexity();
-        Word word = generateWord(category, complexity);
+        Word word = generateWord(category, complexity, wordService);
         return word != null;
     }
 
@@ -65,8 +67,7 @@ public class Game {
         interactionService.println("Word was: " + gameSession.word().word());
     }
 
-    private Word generateWord(Category category, Complexity complexity) {
-        WordService wordService = new WordService(new InCodeWordStorage());
+    private Word generateWord(Category category, Complexity complexity, WordService wordService) {
         try {
             Word word = wordService.getWord(category, complexity);
             this.gameSession = new GameSession(word);
