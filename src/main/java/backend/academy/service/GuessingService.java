@@ -19,6 +19,7 @@ public class GuessingService {
     }
 
     public boolean guessLetter(char letter, GameSession gameSession) {
+        letter = Character.toLowerCase(letter);
         boolean guessed = false;
         for (int i = 0; i < word.word().length(); i++) {
             if (word.word().charAt(i) == letter) {
