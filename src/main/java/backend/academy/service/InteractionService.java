@@ -2,10 +2,11 @@ package backend.academy.service;
 
 import backend.academy.types.Category;
 import backend.academy.types.Complexity;
-import lombok.Getter;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
+import lombok.Getter;
 
 public class InteractionService {
 
@@ -16,7 +17,7 @@ public class InteractionService {
 
     public InteractionService(PrintStream printStream, InputStream inputStream) {
         this.printStream = printStream;
-        scanner = new Scanner(inputStream);
+        scanner = new Scanner(inputStream, StandardCharsets.UTF_8);
     }
 
     public Category inputCategory() {
@@ -44,7 +45,7 @@ public class InteractionService {
     }
 
     public void println(String message) {
-        if (message.equals("Empty word")) {
+        if ("Empty word".equals(message)) {
             printStream.println("try other category and complexity");
         }
         printStream.println(message);
