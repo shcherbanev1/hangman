@@ -20,7 +20,7 @@ public class GuessingServiceTest {
     void setUp() {
         Word word = new Word(Complexity.HARD, Category.ANIMALS, "example");
         gameSession = new GameSession(word);
-        guessingService = new GuessingService(gameSession);
+        guessingService = new GuessingService(word, gameSession.mask());
     }
 
     @Test
@@ -30,50 +30,50 @@ public class GuessingServiceTest {
 
     @Test
     void testGuessFuncReturnTrueIfCorrect() {
-        boolean result = guessingService.guessLetter('e', gameSession);
+        boolean result = guessingService.guessLetter('e', gameSession.mask());
         assertTrue(result);
     }
 
     @Test
     void testGuessFuncReturnFalseIfNotCorrect() {
-        boolean result = guessingService.guessLetter('q', gameSession);
+        boolean result = guessingService.guessLetter('q', gameSession.mask());
         assertFalse(result);
     }
 
 
     @Test
     void testMaskChangeIfCorrect() {
-        guessingService.guessLetter('e', gameSession);
+        guessingService.guessLetter('e', gameSession.mask());
         assertEquals("e*****e", new String(gameSession.mask()));
     }
 
     @Test
     void testMaskChangeIfNotCorrect() {
-        guessingService.guessLetter('q', gameSession);
+        guessingService.guessLetter('q', gameSession.mask());
         assertEquals("*******", new String(gameSession.mask()));
     }
 
     @Test
     void testGuessFuncReturnTrueIfCorrectCapitalLetter() {
-        boolean result = guessingService.guessLetter('E', gameSession);
+        boolean result = guessingService.guessLetter('E', gameSession.mask());
         assertTrue(result);
     }
 
     @Test
     void testGuessFuncReturnFalseIfNotCorrectCapitalLetter() {
-        boolean result = guessingService.guessLetter('Q', gameSession);
+        boolean result = guessingService.guessLetter('Q', gameSession.mask());
         assertFalse(result);
     }
 
     @Test
     void testMaskChangeIfCorrectCapitalLetter() {
-        guessingService.guessLetter('E', gameSession);
+        guessingService.guessLetter('E', gameSession.mask());
         assertEquals("e*****e", new String(gameSession.mask()));
     }
 
     @Test
     void testMaskChangeIfNotCorrectCapitalLetter() {
-        guessingService.guessLetter('Q', gameSession);
+        guessingService.guessLetter('Q', gameSession.mask());
         assertEquals("*******", new String(gameSession.mask()));
     }
 
