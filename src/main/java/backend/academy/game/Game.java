@@ -51,6 +51,7 @@ public class Game {
             interactionService.println(consoleRender.render(gameSession.mistakeService().mistakeCount(),
                 gameSession.mistakeService().maxMistakes()));
             interactionService.println(new String(gameSession.mask()));
+            interactionService.println(showTriedChars());
 
             char letter = interactionService.letterInput();
             boolean guessResult = gameSession.guess(letter);
@@ -76,6 +77,18 @@ public class Game {
             interactionService.println(e.getMessage());
             return null;
         }
+    }
+
+    private String showTriedChars() {
+        if (gameSession.triedChars().isEmpty()) {
+            return "no tried chars";
+        }
+        StringBuilder stringBuilder = new StringBuilder();
+        for (char ch : gameSession.triedChars()) {
+            stringBuilder.append(ch).append(" ");
+        }
+        stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+        return "Tried chars: " + stringBuilder.toString();
     }
 
 }
