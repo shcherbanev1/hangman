@@ -24,14 +24,21 @@ public class WordService {
     }
 
     public Word getWord(Category category, Complexity complexity) throws WordNotFoundException {
+        Word word;
         if (category != null && complexity != null) {
-            return getRandomWord(category, complexity);
+            word = getRandomWord(category, complexity);
         } else if (category != null) {
-            return getRandomWord(category);
+            word = getRandomWord(category);
         } else if (complexity != null) {
-            return getRandomWord(complexity);
+            word = getRandomWord(complexity);
+        } else {
+            word = getRandomWord();
         }
-        return getRandomWord();
+
+        if (!word.word().isEmpty()) {
+            return word;
+        }
+        throw new WordNotFoundException("Empty word");
     }
 
     private Word getRandomWord(Category category, Complexity complexity) throws WordNotFoundException {
