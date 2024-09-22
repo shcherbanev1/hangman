@@ -12,13 +12,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class InteractionServiceTest {
 
     private ByteArrayOutputStream outputStream;
-    private PrintStream printStream;
     private InteractionService interactionService;
 
     @BeforeEach
     public void setUp() {
         outputStream = new ByteArrayOutputStream();
-        printStream = new PrintStream(outputStream);
+        PrintStream printStream = new PrintStream(outputStream);
         interactionService = new InteractionService(printStream, new ByteArrayInputStream("abc\naa\na".getBytes()));
     }
 
