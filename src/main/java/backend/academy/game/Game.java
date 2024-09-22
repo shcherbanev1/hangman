@@ -85,10 +85,10 @@ public class Game {
         }
         StringBuilder stringBuilder = new StringBuilder();
         for (char ch : gameSession.triedChars()) {
-            stringBuilder.append(ch).append(" ");
+            stringBuilder.append(ch).append(' ');
         }
         stringBuilder.deleteCharAt(stringBuilder.length() - 1);
-        return "Tried chars: " + stringBuilder.toString();
+        return "Tried chars: " + stringBuilder;
     }
 
 }

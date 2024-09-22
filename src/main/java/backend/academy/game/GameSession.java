@@ -3,9 +3,9 @@ package backend.academy.game;
 import backend.academy.entity.Word;
 import backend.academy.service.GuessingService;
 import backend.academy.service.MistakeService;
-import lombok.Getter;
 import java.util.HashSet;
 import java.util.Set;
+import lombok.Getter;
 
 public class GameSession {
 
@@ -39,7 +39,5 @@ public class GameSession {
         triedChars.add(letter);
         return guessed;
     }
-
-
 
 }
