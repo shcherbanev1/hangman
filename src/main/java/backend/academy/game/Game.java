@@ -5,7 +5,6 @@ import backend.academy.exception.WordNotFoundException;
 import backend.academy.service.InteractionService;
 import backend.academy.service.WordService;
 import backend.academy.service.render.ConsoleRender;
-import backend.academy.storage.word.InCodeWordStorage;
 import backend.academy.types.Category;
 import backend.academy.types.Complexity;
 import java.io.InputStream;
@@ -18,14 +17,14 @@ public class Game {
     private final ConsoleRender consoleRender;
     private final WordService wordService;
 
-    public Game(PrintStream printStream, InputStream inputStream) {
+    public Game(PrintStream printStream, InputStream inputStream, WordService wordService) {
         this.interactionService = new InteractionService(printStream, inputStream);
         this.consoleRender = new ConsoleRender();
-        wordService = new WordService(new InCodeWordStorage());
+        this.wordService = wordService;
     }
 
     public void start() {
-        while (!initWord(wordService)) {
+        while (!initWord()) {
             interactionService.println("Try again");
         }
         interactionService.println(gameSession.word().getInfo());
@@ -39,10 +38,10 @@ public class Game {
         }
     }
 
-    public boolean initWord(WordService wordService) {
+    private boolean initWord() {
         Category category = interactionService.inputCategory();
         Complexity complexity = interactionService.inputComplexity();
-        Word word = generateWord(category, complexity, wordService);
+        Word word = generateWord(category, complexity);
         return word != null;
     }
 
@@ -68,7 +67,7 @@ public class Game {
         interactionService.println("Word was: " + gameSession.word().word());
     }
 
-    private Word generateWord(Category category, Complexity complexity, WordService wordService) {
+    private Word generateWord(Category category, Complexity complexity) {
         try {
             Word word = wordService.getWord(category, complexity);
             this.gameSession = new GameSession(word);
