@@ -1,5 +1,6 @@
 package backend.academy.service;
 
+import backend.academy.game.GameSession;
 import backend.academy.types.Category;
 import backend.academy.types.Complexity;
 import java.io.InputStream;
@@ -58,6 +59,16 @@ public class InteractionService {
             input = scanner.nextLine().toLowerCase();
         } while (input.length() != 1 || !Character.isLetter(input.charAt(0)));
         return input.charAt(0);
+    }
+
+
+    public void showTriedChars(GameSession gameSession) {
+        if (gameSession.triedChars().isEmpty()) {
+            System.out.println("no tried chars");
+        }
+        for (char ch : gameSession.triedChars()) {
+            System.out.print(ch + ' ');
+        }
     }
 
 }
