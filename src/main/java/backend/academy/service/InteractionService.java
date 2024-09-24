@@ -64,11 +64,12 @@ public class InteractionService {
 
     public void showTriedChars(GameSession gameSession) {
         if (gameSession.triedChars().isEmpty()) {
-            System.out.println("no tried chars");
+            printStream.println("no tried chars");
         }
         for (char ch : gameSession.triedChars()) {
-            System.out.print(ch + ' ');
+            printStream.print(ch + " ");
         }
+        printStream.print('\n');
     }
 
 }
