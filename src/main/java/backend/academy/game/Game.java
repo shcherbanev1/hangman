@@ -48,8 +48,8 @@ public class Game {
 
     private void gameProcess() {
         while (gameSession.isAlive()) {
-            interactionService.println(consoleRender.render(gameSession.mistakeService().mistakeCount(),
-                gameSession.mistakeService().maxMistakes()));
+            interactionService.println(consoleRender.render(gameSession.mistakeCount(),
+                gameSession.maxMistakes()));
             interactionService.println(new String(gameSession.mask()));
             interactionService.println(showTriedChars());
 
@@ -63,8 +63,8 @@ public class Game {
             interactionService.println("______________________________________");
         }
 
-        interactionService.println(consoleRender.render(gameSession.mistakeService().mistakeCount(),
-            gameSession.mistakeService().maxMistakes()));
+        interactionService.println(consoleRender.render(gameSession.mistakeCount(),
+            gameSession.maxMistakes()));
         interactionService.println("Word was: " + gameSession.word().word());
     }
 
