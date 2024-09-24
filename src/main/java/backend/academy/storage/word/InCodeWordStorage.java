@@ -14,12 +14,8 @@ public class InCodeWordStorage extends WordStorage {
     }
 
     private void addWord(Word word) {
-        if (!(wordMap.containsKey(word.category()))) {
-            wordMap.put(word.category(), new EnumMap<>(Complexity.class));
-        }
-        if (!wordMap.get(word.category()).containsKey(word.complexity())) {
-            wordMap.get(word.category()).put(word.complexity(), new ArrayList<>());
-        }
+        wordMap.putIfAbsent(word.category(), new EnumMap<>(Complexity.class));
+        wordMap.get(word.category()).putIfAbsent(word.complexity(), new ArrayList<>());
         wordMap.get(word.category()).get(word.complexity()).add(word);
     }
 
